@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>منيو فرغلي للعصائر الطبيعية</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts (Tajawal for Arabic) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+  
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Tajawal', sans-serif;
+    }
+    @keyframes modal-pop-in {
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .animate-modal-pop-in {
+      animation: modal-pop-in 0.3s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white">
+  <div class="fixed inset-0 z-0">
+    <div id="bg-switch-1" class="absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out" style="filter: brightness(0.4);"></div>
+    <div id="bg-switch-2" class="absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out" style="filter: brightness(0.4);"></div>
+  </div>
+  
+  <main class="relative z-10 container mx-auto px-4 py-8">
+    <header class="text-center my-12">
+      <h1 class="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-lime-500 drop-shadow-lg">
+        فرغلي للعصائر الطبيعية
+      </h1>
+      <p class="text-gray-300 text-lg mt-4">أفضل العصائر الطازجة في المدينة</p>
+    </header>
+
+    <!-- Featured Products Section -->
+    <section id="featured-products" class="my-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-8">المنتجات المميزة</h2>
+        <div id="featured-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <!-- Featured products will be injected here -->
+        </div>
+    </section>
+
+    <section id="categories-section" class="sticky top-0 bg-gray-900/80 backdrop-blur-lg py-4 z-20 mb-8 rounded-b-2xl">
+      <div id="category-buttons" class="flex justify-center items-center gap-2 md:gap-4 flex-wrap">
+        <!-- Category buttons will be injected here by JavaScript -->
+      </div>
+    </section>
+
+    <section id="juice-list-container" class="flex flex-col gap-8">
+        <!-- Juice items and category headers will be injected here -->
+    </section>
+  </main>
+
+  <div id="juice-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm items-center justify-center z-50 p-4 hidden" role="dialog" aria-modal="true" aria-labelledby="modal-name">
+    <div class="relative bg-gray-800 text-white rounded-2xl shadow-2xl w-full max-w-lg mx-auto overflow-hidden animate-modal-pop-in">
+        <img id="modal-image" src="" alt="" class="w-full h-64 object-cover" />
+        <div class="p-6">
+            <h2 id="modal-name" class="text-3xl font-bold text-green-400 mb-2"></h2>
+            <p id="modal-description" class="text-gray-300 mb-4"></p>
+            <div id="modal-prices" class="mt-6"></div>
+        </div>
+        <button id="modal-close" class="absolute top-4 right-4 bg-white/20 rounded-full p-2 text-white hover:bg-white/40 transition-colors" aria-label="Close">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+    </div>
+  </div>
+
+  <footer class="relative z-10 mt-16 bg-gray-900/70 backdrop-blur-md py-12">
+    <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 text-center md:text-right">
+      <div>
+        <h3 class="text-2xl font-bold text-green-400 mb-4">تواصل معنا</h3>
+        <p class="text-gray-300 mb-2"><strong>العنوان:</strong> حدائق أكتوبر 390 فدان الممشى السياحى </p>
+        <p class="text-gray-300 mb-2"><strong>الهاتف:</strong> 01030566078 </p>
+        <p class="text-gray-300"><strong>واتساب:</strong> 01118091234 </p>
+      </div>
+      <div class="w-full h-64 md:h-auto bg-gray-700 rounded-lg overflow-hidden">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.737151368926!2d31.2334493151152!3d30.04442088188204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145840d654ea9521%3A0x2691b3558c433362!2sTahrir%20Square!5e0!3m2!1sen!2seg!4v1678886450123!5m2!1sen!2seg"
+          width="100%"
+          height="100%"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Our Location"
+        ></iframe>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Background Slideshow
+      const bgImages = [
+        'https://images.unsplash.com/photo-1600271886742-f049cd451bba?q=80&w=1974&auto=format&fit=crop', // Orange juice
+        'https://images.unsplash.com/photo-1525385133512-2f3bdd039054?q=80&w=1974&auto=format&fit=crop', // Berry smoothie
+        'https://images.unsplash.com/photo-1600271886742-f049cd451bba?q=80&w=1974&auto=format&fit=crop', // Green juice
+        'https://images.unsplash.com/photo-1525385133512-2f3bdd039054?q=80&w=1974&auto=format&fit=crop', // Assortment of juices
+        'https://images.unsplash.com/photo-1600271886742-f049cd451bba?q=80&w=1974&auto=format&fit=crop'  // Watermelon/strawberry juice
+      ];
+      let currentBgIndex = 0;
+      
+      const bgDiv1 = document.getElementById('bg-switch-1');
+      const bgDiv2 = document.getElementById('bg-switch-2');
+      const bgDivs = [bgDiv1, bgDiv2];
+      let activeDivIndex = 0;
+
+      function cycleBackground() {
+        currentBgIndex = (currentBgIndex + 1) % bgImages.length;
+        const inactiveDivIndex = 1 - activeDivIndex;
+        
+        bgDivs[inactiveDivIndex].style.backgroundImage = `url('${bgImages[currentBgIndex]}')`;
+        bgDivs[inactiveDivIndex].style.opacity = 1;
+        bgDivs[activeDivIndex].style.opacity = 0;
+        
+        activeDivIndex = inactiveDivIndex;
+      }
+
+      bgDiv1.style.backgroundImage = `url('${bgImages[0]}')`;
+      bgDiv1.style.opacity = 1;
+      bgDiv2.style.opacity = 0;
+      setInterval(cycleBackground, 8000);
+
+      const juices = [
+        { id: 1, name: 'قصب', description: 'عصير قصب.', price: { small: 15, medium: 20, super: 0 }, image: 'https://w7.pngwing.com/pngs/663/265/png-transparent-filled-juice-drinking-glass-with-red-straw-sugarcane-juice-engenho-pastel-juice-health-shake-juice-superfood.png', category: 'عصائر شرقية' },
+        { id: 2, name: 'قصب برتقال', description: 'عصير قصب + برتقال.', price: { small: 20, medium: 25, super: 0 }, image: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_632/88e60c117644997.60799055432ae.jpg', category: 'عصائر شرقية' },
+        { id: 3, name: 'قصب ليمون', description: 'عصير قصب + ليمون.', price: { small: 20, medium: 25, super: 0 }, image: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_632/88e60c117644997.60799055432ae.jpg', category: 'عصائر شرقية' },
+        { id: 4, name: 'قصب سوبيا', description: 'عصير قصب + سوبيا.', price: { small: 20, medium: 25, super: 0 }, image: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_632/88e60c117644997.60799055432ae.jpg', category: 'عصائر شرقية' },
+        { id: 5, name: 'تمرهندى', description: 'تمرهندى.', price: { small: 20, medium: 25, super: 0 }, image: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_632/88e60c117644997.60799055432ae.jpg', category: 'عصائر شرقية' },
+
+        { id: 6, name: 'برتقال', description: 'برتقال طبيعى بدون الوان صناعية.', price: { small: 35, medium: 40, super: 0 }, image: 'https://eda.ru/images/RecipeOpenGraph/1200x630/fresh-iz-apelsina-shipovnika-persika-i-morkovi_55342_ogimage.jpg', category: 'فريشات 100% بدون الوان صناعية' },
+        { id: 7, name: 'جريب فروت', description: 'عصير جروب فروت طبيعى بدون الوان صناعية.', price: { small: 25, medium: 35, super: 0 }, image: 'https://eda.ru/images/RecipeOpenGraph/1200x630/fresh-iz-apelsina-shipovnika-persika-i-morkovi_55342_ogimage.jpg', category: 'فريشات 100% بدون الوان صناعية' },
+        { id: 8, name: 'يوسفي', description: 'عصير يوسفي طبيعى بدون الوان صناعية.', price: { small: 35, medium: 40, super: 0 }, image: 'https://eda.ru/images/RecipeOpenGraph/1200x630/fresh-iz-apelsina-shipovnika-persika-i-morkovi_55342_ogimage.jpg', category: 'فريشات 100% بدون الوان صناعية' },
+        { id: 9, name: 'جوافة سادة', description: 'عصير جوافة طبيعى بدون الوان صناعية.', price: { small: 30, medium: 35, super: 0 }, image: 'https://eda.ru/images/RecipeOpenGraph/1200x630/fresh-iz-apelsina-shipovnika-persika-i-morkovi_55342_ogimage.jpg', category: 'فريشات 100% بدون الوان صناعية' },
+        { id: 10, name: 'جوافة باللبن', description: 'عصير جوافة باللبن طبيعى بدون الوان صناعية.', price: { small: 35, medium: 50, super: 0 }, image: 'https://eda.ru/images/RecipeOpenGraph/1200x630/fresh-iz-apelsina-shipovnika-persika-i-morkovi_55342_ogimage.jpg', category: 'فريشات 100% بدون الوان صناعية' },
+
+        { id: 11, name: 'مانجو/ فراولة / فانيليا / شيكولاته / توت / كراميل', description: 'مخفوق كريمي غني بقطع الفواكة الطازجة والحليب الفاخر.', price: { small: 50, medium: 65, super: 0 }, image: 'https://i.ytimg.com/vi/zyoVVQt_nZ0/maxresdefault.jpg', category: 'ميلك شيك' },
+        { id: 12, name: 'ميلك شيك بلو بيرى', description: 'مخفوق كريمي غني بقطع البلوبيرى الطازج والحليب الفاخر.', price: { small: 50, medium: 65, super: 0 }, image: 'https://i.ytimg.com/vi/zyoVVQt_nZ0/maxresdefault.jpg', category: 'ميلك شيك' },
+
+        { id: 13, name: 'مانجو', description: 'عصير مانجو طبيعى.', price: { small: 40, medium: 50, super: 0 }, image: 'https://www.ualberta.ca/en/school-of-dentistry/media-library/istock-185285647.jpg', category: 'عالم المانجو' },
+        { id: 14, name: 'مانجو بالموز', description: 'عصير مانجو طبيعى بالموز.', price: { small: 40, medium: 60, super: 0 }, image: 'https://www.ualberta.ca/en/school-of-dentistry/media-library/istock-185285647.jpg', category: 'عالم المانجو' },
+        { id: 15, name: 'مانجو كيوى', description: 'عصير مانجو طبيعى بالكيوى.', price: { small: 50, medium: 70, super: 0 }, image: 'https://www.ualberta.ca/en/school-of-dentistry/media-library/istock-185285647.jpg', category: 'عالم المانجو' },
+        { id: 16, name: 'مانجو لبن', description: 'عصير مانجو طبيعى باللبن.', price: { small: 40, medium: 55, super: 0 }, image: 'https://www.ualberta.ca/en/school-of-dentistry/media-library/istock-185285647.jpg', category: 'عالم المانجو' },
+        { id: 17, name: 'مانجو بالخوخ', description: 'عصير مانجو طبيعى بالخوخ.', price: { small: 50, medium: 60, super: 0 }, image: 'https://www.ualberta.ca/en/school-of-dentistry/media-library/istock-185285647.jpg', category: 'عالم المانجو' },
+
+
+        { id: 18, name: 'هضبة', description: 'ماجو + زبادى + مانجو + آيس كريم.', price: { small: 80, medium: 100, super: 0 }, image: 'https://i.ytimg.com/vi/uShW9unvcmY/maxresdefault.jpg', category: 'جديد الطاقة من فروتس فرغلى' },
+        { id: 19, name: 'الرافال', description: 'أفوكادو + زبادى + كاجو + لبن + عسل.', price: { small: 90, medium: 100, super: 0 }, image: 'https://i.ytimg.com/vi/uShW9unvcmY/maxresdefault.jpg', category: 'جديد الطاقة من فروتس فرغلى' },
+        { id: 20, name: 'الأسيوى', description: 'أفوكادو + كيوى + اناناس + عسل + لبن.', price: { small: 70, medium: 90, super: 0 }, image: 'https://i.ytimg.com/vi/uShW9unvcmY/maxresdefault.jpg', category: 'جديد الطاقة من فروتس فرغلى' },
+        { id: 21, name: 'فول باور', description: 'سودانى + حلاوة + بلح + لبن.', price: { small: 50, medium: 70, super: 0 }, image: 'https://i.ytimg.com/vi/uShW9unvcmY/maxresdefault.jpg', category: 'جديد الطاقة من فروتس فرغلى' },
+        { id: 22, name: 'فيرارى', description: 'كاجو + حلاوة + بلح + لبن.', price: { small: 80, medium: 100, super: 0 }, image: 'https://i.ytimg.com/vi/uShW9unvcmY/maxresdefault.jpg', category: 'جديد الطاقة من فروتس فرغلى' },
+        { id: 23, name: 'الونش', description: 'بندق + حلاوة + بلح + لبن.', price: { small: 80, medium: 100, super: 0 }, image: 'https://i.ytimg.com/vi/uShW9unvcmY/maxresdefault.jpg', category: 'جديد الطاقة من فروتس فرغلى' },
+
+        { id: 24, name: 'رضعة الأسد', description: 'أيس فانيليا + سوبيا + مانجو.', price: { small: 45, medium: 60, super: 0 }, image: 'https://i.ytimg.com/vi/Fv2GH2Fh9Z0/maxresdefault.jpg', category: 'رضعات الغابة' },
+        { id: 25, name: 'رضعة الفيل', description: 'آيس شيكولاته + سوبيا.', price: { small: 45, medium: 60, super: 0 }, image: 'https://i.ytimg.com/vi/Fv2GH2Fh9Z0/maxresdefault.jpg', category: 'رضعات الغابة' },
+        { id: 26, name: 'رضعة القرد', description: 'آيس فراولة + سوبيا.', price: { small: 45, medium: 60, super: 0 }, image: 'https://i.ytimg.com/vi/Fv2GH2Fh9Z0/maxresdefault.jpg', category: 'رضعات الغابة' },
+        { id: 27, name: 'رضعة الحوت', description: 'آيس كانتلوب + سوبيا.', price: { small: 45, medium: 60, super: 0 }, image: 'https://i.ytimg.com/vi/Fv2GH2Fh9Z0/maxresdefault.jpg', category: 'رضعات الغابة' },
+        { id: 28, name: 'رضعة النمر', description: 'آيس مانجو + سوبيا.', price: { small: 45, medium: 60, super: 0 }, image: 'https://i.ytimg.com/vi/Fv2GH2Fh9Z0/maxresdefault.jpg', category: 'رضعات الغابة' },
+        { id: 29, name: 'رضغة غزال', description: 'آيس بطيخ + سوبيا.', price: { small: 50, medium: 60, super: 0 }, image: 'https://i.ytimg.com/vi/Fv2GH2Fh9Z0/maxresdefault.jpg', category: 'رضعات الغابة' },
+
+        { id: 30, name: 'مانجو - بطيخ - فراولة', description: 'عصير طازج ومنعش.', price: { small: 50, medium: 0, super: 0 }, image: 'https://cafesahara.ru/upload/iblock/7ed/7eddcb30773af9e076d4d6ae8bc6a96a.jpg', category: 'بوبا كورنر' },
+        { id: 31, name: 'آيس كوفى - آيس موكا', description: 'آيس كوفى - آيس موكا.', price: { small: 55, medium: 0, super: 0 }, image: 'https://cafesahara.ru/upload/iblock/7ed/7eddcb30773af9e076d4d6ae8bc6a96a.jpg', category: 'بوبا كورنر' },
+        { id: 32, name: 'آيس شوكليت - بلو بيرى', description: 'آيس شوكليت - بلو بيرى.', price: { small: 60, medium: 0, super: 0 }, image: 'https://cafesahara.ru/upload/iblock/7ed/7eddcb30773af9e076d4d6ae8bc6a96a.jpg', category: 'بوبا كورنر' },
+
+        { id: 33, name: 'بولة / كونو', description: 'آيس كريم نكهات مختلفة.', price: { small: 15, medium: 0, super: 0 }, image: 'https://greenpark-spb.ru/content/lessees/logo/sok-stakan-granat-miata.jpg', category: 'أيس كريم' },
+        { id: 34, name: '2 بولة / كونو', description: 'آيس كريم نكهات مختلفة.', price: { small: 30, medium: 0, super: 0 }, image: 'https://greenpark-spb.ru/content/lessees/logo/sok-stakan-granat-miata.jpg', category: 'أيس كريم' },
+
+        { id: 35, name: 'زبادووو عسل', description: 'زبادووو عسل.', price: { small: 35, medium: 50, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'زبادووو' },
+        { id: 36, name: 'زبادووو مانجو أو فراولة أو آى نوع', description: 'زبادووو مانجو أو فراولة أو آى نوع.', price: { small: 50, medium: 60, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'زبادووو' },
+        { id: 37, name: 'زبادووو فواكة قطع وعسل', description: 'زبادووو فواكة قطع وعسل.', price: { small: 50, medium: 70, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'زبادووو' },
+        { id: 38, name: 'زبادووو خوخ', description: 'زبادووو خوخ.', price: { small: 50, medium: 60, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'زبادووو' },
+        { id: 39, name: 'زبادووو توت أو بلو بيرى', description: 'زبادووو توت أو بلو بيرى.', price: { small: 50, medium: 70, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'زبادووو' },
+        { id: 40, name: 'زبادووو بلح', description: 'زبادووو بلح.', price: { small: 50, medium: 60, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'زبادووو' },
+
+        { id: 41, name: 'لب', description: 'عصير لب.', price: { small: 40, medium: 60, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'محمصات' },
+        { id: 42, name: 'جوز هند', description: 'عصير جوز هند.', price: { small: 45, medium: 65, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'محمصات' },
+        { id: 43, name: 'سودانى فانيليا أو شيكولاتة', description: 'عصير سودانى فانيليا أو شيكولاتة.', price: { small: 50, medium: 70, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'محمصات' },
+        { id: 44, name: 'بندق فانيليا أو شيكولاتة', description: 'عصير بندق فانيليا أو شيكولاتة.', price: { small: 80, medium: 100, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'محمصات' },
+        { id: 45, name: 'كاجو فانيليا أو شيكولاتة', description: 'عصير كاجو فانيليا أو شيكولاتة.', price: { small: 80, medium: 100, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'محمصات' },
+        { id: 46, name: 'لوز فانيليا أو شيكولاتة', description: 'عصير لوز فانيليا أو شيكولاتة.', price: { small: 80, medium: 100, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'محمصات' },
+
+        { id: 47, name: 'فروزن نوتيلا', description: 'نوتيلا + نسكافية + لبن + آيس كريم.', price: { small: 70, medium: 90, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'فروزن شيك' },
+        { id: 48, name: 'آيس موكا', description: 'نسكافية + لبن + آيس فانيليا.', price: { small: 50, medium: 60, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'فروزن شيك' },
+        { id: 49, name: 'آيس كراميل', description: 'نسكافية + آيس كراميل + صوص كراميل + لبن.', price: { small: 50, medium: 60, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'فروزن شيك' },
+        { id: 50, name: 'بنجورنو', description: 'بندق + نسكافية + آيس كريم.', price: { small: 80, medium: 100, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'فروزن شيك' },
+        { id: 51, name: 'تاكى', description: 'موز + نسكافة + لبن + آيس كريم.', price: { small: 45, medium: 65, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'فروزن شيك' },
+
+        { id: 52, name: 'رانى', description: 'تفاح + موز + برتقال.', price: { small: 40, medium: 60, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'دايت كورنر' },
+        { id: 53, name: 'ميجا', description: 'أناناس + كيوى + ليمون.', price: { small: 60, medium: 80, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'دايت كورنر' },
+        { id: 54, name: 'جرين', description: 'كيوى + تفاح اخضر + موز.', price: { small: 50, medium: 70, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'دايت كورنر' },
+        { id: 55, name: 'اللمبى', description: 'أناناس + كيوى + برتقال.', price: { small: 60, medium: 80, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'دايت كورنر' },
+        { id: 56, name: 'فلورست', description: 'برتقال + جنزبيل + ليمون + عسل.', price: { small: 40, medium: 55, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'دايت كورنر' },
+        { id: 57, name: 'سليم شيب', description: 'كيوى + جريب فروت + أناناس.', price: { small: 60, medium: 80, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'دايت كورنر' },
+
+        { id: 58, name: 'ريد منت', description: 'بطيخ + نعناع.', price: { small: 35, medium: 50, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'فيتامينات' },
+        { id: 59, name: 'ستروينج', description: 'زبادى + توت + لبن + آيس كريم.', price: { small: 60, medium: 65, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'فيتامينات' },
+        { id: 60, name: 'المايسترو', description: 'مانجو + خوخ + لبن + آيس كريم.', price: { small: 50, medium: 60, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'فيتامينات' },
+        { id: 61, name: 'الساحر', description: 'مانجو + خوخ + فراولة + آيس كريم.', price: { small: 50, medium: 60, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'فيتامينات' },
+        { id: 62, name: 'فيتامين C', description: 'برتقال + جوافة + ليمون + عسل.', price: { small: 50, medium: 60, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'فيتامينات' },
+        { id: 63, name: 'بطوط', description: 'فراولة + موز + لبن + آيس كريم.', price: { small: 50, medium: 60, super: 0 }, image: 'https://cdn.kenhsinhvien.vn/data/2021/10/312442_6.jpg', category: 'فيتامينات' },
+   ];
+
+      // --- Featured Products Logic ---
+      const featuredJuices = [juices[0], juices[2], juices[4]];
+      const featuredGrid = document.getElementById('featured-grid');
+
+      function createFeaturedCard(juice) {
+          const card = document.createElement('div');
+          card.className = "bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden shadow-lg transform hover:-translate-y-2 transition-transform duration-300 ease-in-out cursor-pointer group relative";
+          card.setAttribute('aria-label', `View details for ${juice.name}`);
+          card.innerHTML = `
+              <div class="absolute top-2 left-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full z-10">مميز</div>
+              <img src="${juice.image}" alt="${juice.name}" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-300" />
+              <div class="p-5 text-center">
+                <h3 class="text-xl font-bold truncate text-white">${juice.name}</h3>
+                <p class="text-gray-300 text-sm my-2">${juice.description}</p>
+                <p class="text-md font-semibold text-green-300">يبدأ من ${juice.price.small} ج.م</p>
+              </div>
+          `;
+          card.addEventListener('click', () => openModal(juice));
+          return card;
+      }
+      
+      function renderFeaturedProducts() {
+          if (!featuredGrid) return;
+          featuredGrid.innerHTML = '';
+          featuredJuices.forEach(juice => {
+              featuredGrid.appendChild(createFeaturedCard(juice));
+          });
+      }
+
+      // --- Juice Menu Logic ---
+      const juiceListContainer = document.getElementById('juice-list-container');
+      const categoryButtonsContainer = document.getElementById('category-buttons');
+      const categoriesSection = document.getElementById('categories-section');
+      
+      const modal = document.getElementById('juice-modal');
+      const modalImage = document.getElementById('modal-image');
+      const modalName = document.getElementById('modal-name');
+      const modalDescription = document.getElementById('modal-description');
+      const modalPricesContainer = document.getElementById('modal-prices');
+      const modalCloseButton = document.getElementById('modal-close');
+
+      let selectedCategory = 'الكل';
+
+      function createJuiceListItem(juice) {
+          const item = document.createElement('div');
+          item.className = "bg-white/10 backdrop-blur-md rounded-2xl shadow-lg transform hover:bg-white/20 transition-all duration-300 ease-in-out cursor-pointer group flex items-center gap-x-4 p-3";
+          item.setAttribute('aria-label', `View details for ${juice.name}`);
+          item.innerHTML = `
+              <img src="${juice.image}" alt="${juice.name}" class="w-24 h-24 md:w-28 md:h-28 object-cover rounded-lg flex-shrink-0 group-hover:scale-105 transition-transform duration-300" />
+              <div class="flex-grow text-right">
+                  <h3 class="text-lg md:text-xl font-bold text-white">${juice.name}</h3>
+                  <p class="text-sm text-gray-300 mt-1 hidden md:block">${juice.description}</p>
+              </div>
+              <div class="text-center pl-4 flex-shrink-0">
+                  <p class="text-sm text-gray-200">يبدأ من</p>
+                  <p class="text-lg md:text-xl font-semibold text-green-300">${juice.price.small} ج.م</p>
+              </div>
+          `;
+          item.addEventListener('click', () => openModal(juice));
+          return item;
+      }
+      
+      function createCategoryHeader(category) {
+        const header = document.createElement('h2');
+        header.className = "text-3xl font-bold text-green-400 border-b-2 border-green-400/30 pb-2 mt-8 mb-4";
+        header.textContent = category;
+        return header;
+      }
+
+      function renderJuices(category) {
+          juiceListContainer.innerHTML = '';
+          if (category === 'الكل') {
+              const categories = [...new Set(juices.map(j => j.category))];
+              categories.forEach(cat => {
+                  juiceListContainer.appendChild(createCategoryHeader(cat));
+                  juices.filter(j => j.category === cat).forEach(juice => {
+                      juiceListContainer.appendChild(createJuiceListItem(juice));
+                  });
+              });
+          } else {
+              const filteredJuices = juices.filter(j => j.category === category);
+              juiceListContainer.appendChild(createCategoryHeader(category));
+              filteredJuices.forEach(juice => {
+                  juiceListContainer.appendChild(createJuiceListItem(juice));
+              });
+          }
+      }
+
+      function updateCategoryButtons() {
+          Array.from(categoryButtonsContainer.children).forEach(button => {
+              const category = button.textContent;
+              const baseClasses = 'px-4 py-2 text-sm md:text-base font-semibold rounded-full border-2 transition-all duration-300 ease-in-out transform hover:scale-105';
+              const activeClasses = 'bg-green-500 border-green-400 text-white scale-110';
+              const inactiveClasses = 'bg-transparent border-gray-500 text-gray-300 hover:bg-green-500/20 hover:border-green-500';
+              button.className = `${baseClasses} ${selectedCategory === category ? activeClasses : inactiveClasses}`;
+          });
+      }
+
+      function renderCategoryButtons() {
+          const categories = ['الكل', ...new Set(juices.map(j => j.category))];
+          categories.forEach(category => {
+              const button = document.createElement('button');
+              button.textContent = category;
+              button.addEventListener('click', () => {
+                  selectedCategory = category;
+                  updateCategoryButtons();
+                  renderJuices(category);
+                  categoriesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              });
+              categoryButtonsContainer.appendChild(button);
+          });
+          updateCategoryButtons();
+      }
+      
+      function openModal(juice) {
+          if (!modal) return;
+          modalImage.src = juice.image; 
+          modalImage.alt = juice.name;
+          modalName.textContent = juice.name;
+          modalDescription.textContent = juice.description;
+          
+          modalPricesContainer.innerHTML = `
+            <div class="grid grid-cols-3 gap-4 text-center rounded-lg bg-white/5 p-4">
+                <div>
+                    <p class="text-lg font-bold text-gray-300">صغير</p>
+                    <p class="text-2xl font-bold text-green-400 mt-1">${juice.price.small} ج.م</p>
+                </div>
+                <div>
+                    <p class="text-lg font-bold text-gray-300">وسط</p>
+                    <p class="text-2xl font-bold text-green-400 mt-1">${juice.price.medium} ج.م</p>
+                </div>
+                <div>
+                    <p class="text-lg font-bold text-gray-300">سوبر</p>
+                    <p class="text-2xl font-bold text-green-400 mt-1">${juice.price.super} ج.م</p>
+                </div>
+            </div>
+          `;
+
+          modal.classList.remove('hidden');
+          modal.classList.add('flex');
+      }
+
+      function closeModal() {
+          if (!modal) return;
+          modal.classList.add('hidden');
+          modal.classList.remove('flex');
+      }
+
+      // Initial Render
+      renderFeaturedProducts();
+      renderCategoryButtons();
+      renderJuices(selectedCategory);
+
+      if (modal) {
+          modalCloseButton.addEventListener('click', closeModal);
+          modal.addEventListener('click', (e) => {
+              if (e.target === modal) {
+                  closeModal();
+              }
+          });
+      }
+    });
+  </script>
+</body>
+</html>
